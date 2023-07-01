@@ -1,3 +1,4 @@
+# coding=utf-8
 from random import randint
 
 
@@ -17,7 +18,7 @@ def get_hard_attack():
     return randint(30, 40)
 
 
-def compare_valumes(enemy_health, user_total_attack):
+def compare_values(enemy_health, user_total_attack):
     point_difference = abs(enemy_health - user_total_attack)
     if 0 <= point_difference <= 10:
         return True
@@ -36,7 +37,7 @@ def get_user_attack():
         input_attack = input('Введи тип атаки: ').lower()
         attack_value = attacks_types[input_attack]()
         print(f'Количество очков твоей атаки: {attack_value}.')
-        total += 1
+        total += attack_value
     return total
 
 
@@ -45,13 +46,15 @@ def run_game():
     enemy_health = set_enemy_health()
     print(f'Тобой нанесён урон противнику равный {user_total_attack}.')
     print(f'Очки здоровья противника до твоей атаки: {enemy_health}.')
-    if compare_valumes(enemy_health, user_total_attack):
+    if compare_values(enemy_health, user_total_attack):
         print('Ура! Победа за тобой!')
     else:
         print('В этот раз не повезло :( Бой проигран.')
     yes_no = {
         'Y': True,
         'N': False,
+        'y': True,
+        'n': False,
     }
     replay = input('Чтобы сыграть ещё раз, введи "y"; '
                    'если не хочешь продолжать игру, введи "n": ')
